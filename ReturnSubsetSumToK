@@ -1,24 +1,48 @@
 #include <bits/stdc++.h> 
 
-void findSubset(int ind,vector<int>&nums,vector<int>&ds,vector<vector<int>>&ans)
-{
-    ans.push_back(ds);
-    for(int i=ind;i<nums.size();i++)
-    {
-        if(i!=ind && nums[i]==nums[i-1]) continue;
-        ds.push_back(nums[i]);
-        findSubset(i+1,nums,ds,ans);
-        ds.pop_back();
-    }
-}
-vector<vector<int>> uniqueSubsets(int n, vector<int> &arr)
-{
-    // Write your code here.
-    vector<int>ds;
-    vector<vector<int>>ans;
-    sort(arr.begin(),arr.end());
-    findSubset(0,arr,ds,ans);
+ 
 
-    return ans;
-    
+void solve(int i,int sum,int k,vector<int> &num,vector<vector<int>> &st,vector<int> &v){
+
+ if(i==num.size()){
+
+     if(sum==k)st.push_back(v);
+
+return ;
+
+ }
+
+solve(i+1,sum,k,num,st,v);
+
+v.push_back(num[i]);
+
+solve(i+1,sum+num[i],k,num,st,v);
+
+v.pop_back();
+
+ 
+
 }
+
+ 
+
+vector<vector<int>> findSubsetsThatSumToK(vector<int> arr, int n, int k)
+
+{
+
+ 
+
+vector<vector<int>> st;
+
+    vector<int> v;
+
+    
+
+solve(0,0,k,arr,st,v);
+
+ 
+
+return st;
+
+}
+
